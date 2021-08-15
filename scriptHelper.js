@@ -1,4 +1,3 @@
-// Write your helper functions here!
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
@@ -17,11 +16,17 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-   
+    if (testInput.value === "") {
+        return "Empty";
+    } else if (isNaN(testInput.value) === true) {
+        return "Not a Number";
+    } else if (typeof Number(testInput.value) === "number") {
+        return "Is a Number";
+    }
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+
 }
 
 async function myFetch() {
