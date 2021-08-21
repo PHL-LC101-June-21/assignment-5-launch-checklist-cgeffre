@@ -1,16 +1,14 @@
 window.addEventListener("load", function() {
 
-    // Validation checks that all fields have an input
+    // Validation checks that all fields have a valid input
     let formSection = document.getElementById("launchForm");
-    formSection.addEventListener("submit", function (event) {
+    launchForm.addEventListener("submit", function (event) {
         let pilotCheck = formSection.querySelector("input[name=pilotName]");
         let copilotCheck = formSection.querySelector("input[name=copilotName]");
         let fuelCheck = formSection.querySelector("input[name=fuelLevel]");
         let cargoCheck = formSection.querySelector("input[name=cargoMass]");
-        if (pilotCheck.value === "" || copilotCheck.value === "" || fuelCheck.value === "" || cargoCheck.value === "") {
-            alert("Please enter data for all fields.");
-            event.preventDefault();
-        }
+        let list = "";
+        formSubmission(launchForm, list, pilotCheck, copilotCheck, fuelCheck, cargoCheck);
     });
 
    let listedPlanets;

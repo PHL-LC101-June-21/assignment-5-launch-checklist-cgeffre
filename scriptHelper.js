@@ -26,7 +26,22 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-
+    if (validateInput(pilot) === "Empty" || validateInput(pilot) === "Is a Number") {
+        alert("Invalid pilot input!");
+        event.preventDefault();
+    }
+    if (validateInput(copilot) === "Empty" || validateInput(copilot) === "Is a Number") {
+        alert("Invalid copilot input!"); 
+        event.preventDefault();   
+    }
+    if (validateInput(fuelLevel) === "Empty" || validateInput(fuelLevel) === "Not a Number") {
+        alert("Invalid fuel level input!");  
+        event.preventDefault();  
+    }    
+    if (validateInput(cargoLevel) === "Empty" || validateInput(cargoLevel) === "Not a Number") {
+        alert("Invalid cargo level input!");
+        event.preventDefault();   
+    }
 }
 
 async function myFetch() {
@@ -41,8 +56,10 @@ async function myFetch() {
 function pickPlanet(planets) {
 }
 
-module.exports.addDestinationInfo = addDestinationInfo;
-module.exports.validateInput = validateInput;
-module.exports.formSubmission = formSubmission;
-module.exports.pickPlanet = pickPlanet; 
-module.exports.myFetch = myFetch;
+module.exports = {
+addDestinationInfo: addDestinationInfo,
+validateInput: validateInput,
+formSubmission: formSubmission,
+pickPlanet: pickPlanet,
+myFetch: myFetch
+}
