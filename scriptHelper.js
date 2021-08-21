@@ -25,22 +25,47 @@ function validateInput(testInput) {
     }
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+// Validates data and updates HTML
+function formSubmission(doc, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let submitReady = true;
     if (validateInput(pilot) === "Empty" || validateInput(pilot) === "Is a Number") {
         alert("Invalid pilot input!");
+        submitReady = false;
         event.preventDefault();
-    }
+    } 
     if (validateInput(copilot) === "Empty" || validateInput(copilot) === "Is a Number") {
         alert("Invalid copilot input!"); 
+        submitReady = false;
         event.preventDefault();   
     }
     if (validateInput(fuelLevel) === "Empty" || validateInput(fuelLevel) === "Not a Number") {
-        alert("Invalid fuel level input!");  
+        alert("Invalid fuel level input!");
+        submitReady = false;
         event.preventDefault();  
     }    
     if (validateInput(cargoLevel) === "Empty" || validateInput(cargoLevel) === "Not a Number") {
         alert("Invalid cargo level input!");
+        submitReady = false;
         event.preventDefault();   
+    }
+    if (submitReady === true) {
+        list.style.visibility = "visible";
+        document.getElementById("pilotStatus").innerHTML = `${pilot.value} is Ready`;
+        document.getElementById("copilotStatus").innerHTML = `${copilot.value} is Ready`;
+        if (fuelLevel.value < 10000) {
+            document.getElementById("fuelStatus").innerHTML = `Not enough fuel!`;
+            document.getElementById("launchStatus").innerHTML = `Shuttle Not Ready For Launch`;
+            document.getElementById("launchStatus").style.color = "red";
+        }
+        if (cargoLevel.value > 10000) {
+        document.getElementById("cargoStatus").innerHTML = `Too much cargo for liftoff`;
+        document.getElementById("launchStatus").innerHTML = `Shuttle Not Ready For Launch`;
+        document.getElementById("launchStatus").style.color = "red";
+        }
+        if (cargoLevel.value < 10001 && fuelLevel.value > 9999) {
+        document.getElementById("launchStatus").innerHTML = `Shuttle Ready For Launch`;
+        document.getElementById("launchStatus").style.color = "green";
+        }
     }
 }
 
