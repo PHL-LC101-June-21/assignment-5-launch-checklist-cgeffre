@@ -1,16 +1,16 @@
 require('isomorphic-fetch');
 
-function addDestinationInfo(planet) {
-    document.getElementById("missionTarget").innerHTML  = `
+function addDestinationInfo(planet, selected) {
+    document.getElementById("missionTarget").innerHTML  = ` 
                 <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: ${planet[0].name}</li>
-                    <li>Diameter: ${planet.diameter}</li>
-                    <li>Star: ${planet.star}</li>
-                    <li>Distance from Earth: ${planet.distance}</li>
-                    <li>Number of Moons: ${planet.moons}</li>
+                    <li>Name: ${planet[selected].name}</li>
+                    <li>Diameter: ${planet[selected].diameter}</li>
+                    <li>Star: ${planet[selected].star}</li>
+                    <li>Distance from Earth: ${planet[selected].distance}</li>
+                    <li>Number of Moons: ${planet[selected].moons}</li>
                 </ol>
-                <img src="${planet.image}">
+                <img src="${planet[selected].image}">
                 `    
 }
 
@@ -27,32 +27,32 @@ function validateInput(testInput) {
 // Validates data and updates HTML
 function formSubmission(doc, list, pilot, copilot, fuelLevel, cargoLevel) {
     let submitReady = true;
-    if (validateInput(pilot) === "Empty" || validateInput(pilot) === "Is a Number") {
+    if (validateInput(pilot) === "Is a Number") {
         alert("Invalid pilot input!");
         submitReady = false;
         event.preventDefault();
     } 
-    if (validateInput(copilot) === "Empty" || validateInput(copilot) === "Is a Number") {
+    if (validateInput(copilot) === "Is a Number") {
         alert("Invalid copilot input!"); 
         submitReady = false;
         event.preventDefault();   
     }
-    if (validateInput(fuelLevel) === "Empty" || validateInput(fuelLevel) === "Not a Number") {
+    if (validateInput(fuelLevel) === "Not a Number") {
         alert("Invalid fuel level input!");
         submitReady = false;
         event.preventDefault();  
     }    
-    if (validateInput(cargoLevel) === "Empty" || validateInput(cargoLevel) === "Not a Number") {
+    if (validateInput(cargoLevel) === "Not a Number") {
         alert("Invalid cargo level input!");
         submitReady = false;
         event.preventDefault();   
     }
     if (submitReady === true) {
         list.style.visibility = "visible";
-        document.getElementById("pilotStatus").innerHTML = `${pilot.value} is Ready`;
-        document.getElementById("copilotStatus").innerHTML = `${copilot.value} is Ready`;
+        document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot.value} is ready for launch`;
+        document.getElementById("copilotStatus").innerHTML = `Copilot ${copilot.value} is ready for launch`;
         if (fuelLevel.value < 10000) {
-            document.getElementById("fuelStatus").innerHTML = `Not enough fuel!`;
+            document.getElementById("fuelStatus").innerHTML = `Not enough fuel`;
             document.getElementById("launchStatus").innerHTML = `Shuttle Not Ready For Launch`;
             document.getElementById("launchStatus").style.color = "red";
         }
@@ -77,8 +77,8 @@ async function myFetch () {
 }
 
 function pickPlanet(planets) {
-    let planet = Math.floor(Math.random()*planets.length);
-    return planet;
+    planets = Math.floor(Math.random()*planets.length);
+    return planets;
 }
 
 module.exports = {
