@@ -8,12 +8,9 @@ window.addEventListener("load", function() {
         let fuelCheck = formSection.querySelector("input[name=fuelLevel]");
         let cargoCheck = formSection.querySelector("input[name=cargoMass]");
         let list = document.getElementById("faultyItems");
-        if (pilotCheck.value === "" || copilotCheck.value === "" || fuelCheck.value === "" || cargoCheck.value === "") {
-            alert("Please enter data for all fields.");
-            event.preventDefault();
-        } else {
         formSubmission(document, list, pilotCheck, copilotCheck, fuelCheck, cargoCheck);
-        }
+        // event.preventDefault();
+        event.preventDefault();
     });
 
     //Calls to fetch data and parse results
@@ -28,5 +25,4 @@ window.addEventListener("load", function() {
         let selected = pickPlanet(listedPlanets);
         addDestinationInfo(listedPlanets, selected);
      })
-   
 });
